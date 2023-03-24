@@ -1,5 +1,5 @@
 import { DbId } from '../../../global-types/db.types'
-import { UsersModel, UsersSchema } from '../domain/user.entity'
+import { UsersModel } from '../domain/user.entity'
 import { usersRepository } from '../repositories/users.repository'
 
 class UsersService {
