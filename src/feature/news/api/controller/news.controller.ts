@@ -4,7 +4,8 @@ import {
     RequestWithBody,
     RequestWithParams,
     RequestWithParamsAndBody,
-    RequestWithQuery
+    RequestWithQuery,
+    StatusPublish
 } from '../../../../global-types/request.type'
 import { QueryNews } from './models/input.query.model'
 import { PaginatedType } from '../../../../global-types/query.type'
@@ -55,6 +56,17 @@ class NewsController {
         const deletedBlog = await newsService.deleteNews(req.params.id, req.user!.userId)
 
         if (!deletedBlog) {
+            res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
+            return
+        }
+
+        res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
+    }
+
+    async publish(req: RequestWithParamsAndBody<IdParams, StatusPublish>, res: Response) {
+        const news = await newsService.publish(req.params.id, req.body.status, req.user!.userId)
+
+        if (!news) {
             res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
             return
         }

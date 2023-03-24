@@ -25,6 +25,15 @@ class NewsService {
         await newsRepository.save(news)
         return true
     }
+
+    async publish(id: DbId, status: boolean, userId: string): Promise<boolean> {
+        const news = await newsRepository.getNewsById(id)
+        if (!news) return false
+        if (!news.isOwner(userId)) return false
+        news.publish(status)
+        await newsRepository.save(news)
+        return true
+    }
 }
 
 export const newsService = new NewsService()

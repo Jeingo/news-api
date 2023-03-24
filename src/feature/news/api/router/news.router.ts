@@ -37,3 +37,5 @@ newsRouter.put(
 )
 
 newsRouter.delete('/:id', bearerAuth, idValidation, newsController.deleteNews)
+
+newsRouter.put('/:id/publish', bearerAuth, idValidation, newsController.publish)
