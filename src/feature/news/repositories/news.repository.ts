@@ -10,10 +10,6 @@ class NewsRepository {
     async save(news: NewsDocument): Promise<NewsDocument> {
         return await news.save()
     }
-    async deleteNews(id: DbId): Promise<boolean> {
-        const result = await NewsModel.findByIdAndDelete(new ObjectId(id))
-        return !!result
-    }
 }
 
 export const newsRepository = new NewsRepository()

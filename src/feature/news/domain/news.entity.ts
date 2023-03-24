@@ -27,10 +27,16 @@ NewsSchema.statics.make = function (title: string, description: string, content:
 }
 
 NewsSchema.methods.update = function (title: string, description: string, content: string): boolean {
-    this.title = title
-    this.description = description
-    this.content = content
+    if (!this.isDeleted) {
+        this.title = title
+        this.description = description
+        this.content = content
+    }
     return true
+}
+
+NewsSchema.methods.delete = function (): boolean {
+    return (this.isDeleted = true)
 }
 
 NewsSchema.methods.publish = function (status: boolean): boolean {

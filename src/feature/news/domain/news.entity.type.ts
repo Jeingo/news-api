@@ -18,6 +18,7 @@ type NewsStatics = {
 
 export type NewsMethods = {
     update: (title: string, description: string, content: string) => boolean
+    delete: () => boolean
     publish: (status: boolean) => boolean
     isOwner: (userId: string) => boolean
 }

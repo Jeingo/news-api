@@ -48,7 +48,16 @@ class NewsController {
         res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
     }
 
-    async deleteNews(req: RequestWithParams<IdParams>, res: Response) {}
+    async deleteNews(req: RequestWithParams<IdParams>, res: Response) {
+        const deletedBlog = await newsService.deleteNews(req.params.id, req.user!.userId)
+
+        if (!deletedBlog) {
+            res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
+            return
+        }
+
+        res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
+    }
 }
 
 export const newsController = new NewsController()

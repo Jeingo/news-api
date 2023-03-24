@@ -17,7 +17,12 @@ class NewsService {
         return true
     }
 
-    async deleteNews(id: DbId): Promise<boolean> {
+    async deleteNews(id: DbId, userId: string): Promise<boolean> {
+        const news = await newsRepository.getNewsById(id)
+        if (!news) return false
+        if (!news.isOwner(userId)) return false
+        news.delete()
+        await newsRepository.save(news)
         return true
     }
 }
