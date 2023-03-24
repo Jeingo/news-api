@@ -7,12 +7,13 @@ import {
     descriptionValidation,
     titleValidation
 } from '../../../../middlewares/input.news.validation'
+import { anonymousAuth } from '../../../../middlewares/authorization/anonymous.auth'
 
 export const newsRouter = Router({})
 
-newsRouter.get('/', newsController.getAllNews)
+newsRouter.get('/', anonymousAuth, newsController.getAllNews)
 
-newsRouter.get('/:id', idValidation, newsController.getNewsById)
+newsRouter.get('/:id', idValidation, anonymousAuth, newsController.getNewsById)
 
 newsRouter.post(
     '/',

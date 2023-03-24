@@ -8,11 +8,12 @@ export type News = {
     published: boolean
     isDeleted: boolean
     static_img: string
+    userId: string
 }
 export type NewsDocument = HydratedDocument<News> & NewsMethods
 
 type NewsStatics = {
-    make: (title: string, description: string, content: string) => NewsDocument
+    make: (title: string, description: string, content: string, userId: string) => NewsDocument
 }
 
 export type NewsMethods = {
