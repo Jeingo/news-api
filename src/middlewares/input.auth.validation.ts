@@ -1,25 +1,24 @@
 import { body } from 'express-validator'
+import { usersRepository } from '../feature/users/repositories/users.repository'
 
 const patternLogin = /^[a-zA-Z0-9_-]*$/
 const patternEmail = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/
 
-//todo refactoring
-//
-// const checkEmail = async (email: string) => {
-//     const foundUser = await usersQueryRepository.getUser(email)
-//     if (foundUser) {
-//         throw new Error('Email is already exist')
-//     }
-//     return true
-// }
-//
-// const checkLogin = async (login: string) => {
-//     const foundUser = await usersQueryRepository.getUser(login)
-//     if (foundUser) {
-//         throw new Error('Email is already exist')
-//     }
-//     return true
-// }
+const checkEmail = async (email: string) => {
+    const user = await usersRepository.getUserByLoginOrEmail(email)
+    if (user) {
+        throw new Error('Email is already exist')
+    }
+    return true
+}
+
+const checkLogin = async (login: string) => {
+    const user = await usersRepository.getUserByLoginOrEmail(login)
+    if (user) {
+        throw new Error('Email is already exist')
+    }
+    return true
+}
 
 export const loginOrEmailValidation = body('loginOrEmail')
     .trim()
@@ -45,8 +44,8 @@ export const loginRegistrationValidation = body('login')
     .withMessage('Should be less than 10 and more than 3 symbols')
     .matches(patternLogin)
     .withMessage('Should be correct login with a-z/A-Z/0-9 !')
-// .custom(checkLogin)
-// .withMessage('The user with this login is already exist')
+    .custom(checkLogin)
+    .withMessage('The user with this login is already exist')
 
 export const passwordRegistrationValidation = body('password')
     .trim()
@@ -65,5 +64,5 @@ export const emailRegistrationValidation = body('email')
     .withMessage('Should be string type')
     .matches(patternEmail)
     .withMessage('Should be correct email')
-// .custom(checkEmail)
-// .withMessage('The user with this email is already exist')
+    .custom(checkEmail)
+    .withMessage('The user with this email is already exist')
