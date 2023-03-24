@@ -3,6 +3,8 @@ import { body } from 'express-validator'
 const patternLogin = /^[a-zA-Z0-9_-]*$/
 const patternEmail = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/
 
+//todo refactoring
+//
 // const checkEmail = async (email: string) => {
 //     const foundUser = await usersQueryRepository.getUser(email)
 //     if (foundUser) {
@@ -26,7 +28,7 @@ export const loginOrEmailValidation = body('loginOrEmail')
     .isString()
     .withMessage('Should be string type')
 
-export const passwordFromAuthValidation = body('password')
+export const passwordLoginValidation = body('password')
     .trim()
     .notEmpty()
     .withMessage(`Shouldn't be empty`)
