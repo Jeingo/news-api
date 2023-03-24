@@ -6,4 +6,5 @@ export type OutputNewsModel = {
     createdAt: string
     static_img: string
     userId: string
+    fileName: string
 }

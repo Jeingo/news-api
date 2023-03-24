@@ -15,6 +15,7 @@ import { InputCreateModel } from './models/input.create.model'
 import { newsService } from '../../service/news.service'
 import { HTTP_STATUSES } from '../../../../constants/http-statuses'
 import { newsQueryRepository } from '../../repositories/news.query.repository'
+import { UploadedFile } from 'express-fileupload'
 
 class NewsController {
     async getAllNews(req: RequestWithQuery<QueryNews>, res: Response<PaginatedType<OutputNewsModel>>) {
@@ -34,7 +35,8 @@ class NewsController {
 
     async createNews(req: RequestWithBody<InputCreateModel>, res: Response<OutputNewsModel>) {
         const { title, description, content } = req.body
-        const newsId = await newsService.createNews(title, description, content, req.user!.userId)
+        const file = req.files!.file as UploadedFile
+        const newsId = await newsService.createNews(title, description, content, file, req.user!.userId)
         const news = await newsQueryRepository.getNewsById(newsId, req.user!.userId)
         res.status(HTTP_STATUSES.CREATED_201).json(news!)
     }

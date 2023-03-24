@@ -9,10 +9,17 @@ export const NewsSchema = new mongoose.Schema<News>({
     published: { type: Boolean, required: true },
     isDeleted: { type: Boolean, required: true },
     static_img: { type: String },
-    userId: { type: String }
+    userId: { type: String },
+    fileName: { type: String }
 })
 
-NewsSchema.statics.make = function (title: string, description: string, content: string, userId: string) {
+NewsSchema.statics.make = function (
+    title: string,
+    description: string,
+    content: string,
+    userId: string,
+    fileName: string
+) {
     const newDate = new Date()
     return new NewsModel({
         title: title,
@@ -22,7 +29,8 @@ NewsSchema.statics.make = function (title: string, description: string, content:
         published: false,
         isDeleted: false,
         static_img: '/img',
-        userId: userId
+        userId: userId,
+        fileName: fileName
     })
 }
 

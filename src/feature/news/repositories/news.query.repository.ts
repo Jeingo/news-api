@@ -60,7 +60,8 @@ class NewsQueryRepository {
             content: news.content,
             createdAt: news.createdAt,
             static_img: news.static_img,
-            userId: news.userId
+            userId: news.userId,
+            fileName: news.fileName
         }
     }
 
