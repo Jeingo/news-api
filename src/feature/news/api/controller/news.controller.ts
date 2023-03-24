@@ -16,7 +16,10 @@ import { HTTP_STATUSES } from '../../../../constants/http-statuses'
 import { newsQueryRepository } from '../../repositories/news.query.repository'
 
 class NewsController {
-    async getAllNews(req: RequestWithQuery<QueryNews>, res: Response<PaginatedType<OutputNewsModel>>) {}
+    async getAllNews(req: RequestWithQuery<QueryNews>, res: Response<PaginatedType<OutputNewsModel>>) {
+        const allNews = await newsQueryRepository.getAllNews(req.query, req.user?.userId)
+        res.status(HTTP_STATUSES.OK_200).json(allNews)
+    }
 
     async getNewsById(req: RequestWithParams<IdParams>, res: Response<OutputNewsModel>) {
         const news = await newsQueryRepository.getNewsById(req.params.id, req.user?.userId)
