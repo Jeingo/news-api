@@ -5,8 +5,17 @@ import { ObjectId } from 'mongodb'
 import { NewsDocument } from '../domain/news.entity.type'
 
 class NewsQueryRepository {
-    async getNewsById(id: DbId): Promise<OutputNewsModel | null> {
-        const result = await NewsModel.findById(new ObjectId(id))
+    async getNewsById(id: DbId, userId?: string): Promise<OutputNewsModel | null> {
+        let result
+        if (userId) {
+            result = await NewsModel.findOne().or([
+                { _id: new ObjectId(id), isDeleted: false, published: true },
+                { _id: new ObjectId(id), isDeleted: false, published: false, userId: userId }
+            ])
+        } else {
+            result = await NewsModel.findOne({ _id: new ObjectId(id), isDeleted: false, published: true })
+        }
+
         if (!result) return null
         return this._getOutputNews(result)
     }
