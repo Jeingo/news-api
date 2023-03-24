@@ -5,8 +5,8 @@ import {
     loginRegistrationValidation,
     passwordLoginValidation,
     passwordRegistrationValidation
-} from '../../../middlewares/input.auth.validation'
-import { inputValidation } from '../../../middlewares/input.validation'
+} from '../../../../middlewares/input.auth.validation'
+import { inputValidation } from '../../../../middlewares/input.validation'
 import { authController } from '../controller/auth.controller'
 
 export const authRouter = Router({})

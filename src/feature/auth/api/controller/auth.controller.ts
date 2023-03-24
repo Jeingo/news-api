@@ -1,12 +1,12 @@
-import { HTTP_STATUSES } from '../../../constants/http-statuses'
-import { RequestWithBody } from '../../../global-types/request.type'
-import { InputRegistrationModel } from '../models/input.registration.model'
-import { InputLoginModel } from '../models/input.login.model'
+import { HTTP_STATUSES } from '../../../../constants/http-statuses'
+import { RequestWithBody } from '../../../../global-types/request.type'
+import { InputRegistrationModel } from './models/input.registration.model'
+import { InputLoginModel } from './models/input.login.model'
 import { Request, Response } from 'express'
-import { usersService } from '../../users/services/users.service'
-import { authService } from '../services/auth.service'
-import { jwtService } from '../../../infrastructure/jwt.service'
-import { settings } from '../../../settings/setting'
+import { usersService } from '../../../users/service/users.service'
+import { authService } from '../../service/auth.service'
+import { jwtService } from '../../../../infrastructure/jwt.service'
+import { settings } from '../../../../settings/setting'
 
 const SECURE_COOKIE_MODE = settings.SECURE_COOKIE_MODE == 'true' //todo refactoring
 

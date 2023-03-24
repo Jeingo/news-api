@@ -1,8 +1,8 @@
 import express from 'express'
 import cookieParser from 'cookie-parser'
-import { authRouter } from './feature/auth/router/auth.router'
-import { newsRouter } from './feature/news/router/news.router'
-import { testRouter } from './feature/testing/router/testing.router'
+import { authRouter } from './feature/auth/api/router/auth.router'
+import { newsRouter } from './feature/news/api/router/news.router'
+import { testRouter } from './feature/testing/api/router/testing.router'
 
 export const app = express()
 
