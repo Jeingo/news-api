@@ -1,16 +1,22 @@
-import { Model, Document, Types } from 'mongoose'
+import { Model, Types, HydratedDocument } from 'mongoose'
+import { Token } from '../../../global-types/token.type'
 
-type Users = {
+export type User = {
     login: string
     hash: string
     email: string
     createdAt: string
+    refreshToken: Token
 }
+export type UserDocument = HydratedDocument<User> & UsersMethods
 
 type UsersStatics = {
-    make: (login: string, password: string, email: string) => UsersModelFullType
+    make: (login: string, password: string, email: string) => UserDocument
 }
 
-export type UsersModelType = Users & Document
+export type UsersMethods = {
+    updateRefreshToken: (refreshToken: Token) => boolean
+    deleteRefreshToken: () => boolean
+}
 
-export type UsersModelFullType = Model<UsersModelType> & UsersStatics & { _id: Types.ObjectId }
+export type UsersModelFullType = Model<UserDocument> & UsersStatics & { _id: Types.ObjectId }
