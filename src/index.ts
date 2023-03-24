@@ -1,6 +1,6 @@
 import { app } from './app'
-import {settings} from "./settings/setting";
-import {runDb} from "./db/db";
+import { settings } from './settings/setting'
+import { runDb } from './db/db'
 
 const PORT = settings.PORT
 

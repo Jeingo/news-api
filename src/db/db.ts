@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import {settings} from "../settings/setting";
+import { settings } from '../settings/setting'
 
 const mongoUrl = settings.MONGO_URL
 const dbName = settings.DB_NAME
