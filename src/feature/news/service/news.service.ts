@@ -8,9 +8,10 @@ class NewsService {
         await newsRepository.save(news)
         return news._id.toString()
     }
-    async updateNews(id: DbId, title: string, description: string, content: string): Promise<boolean> {
+    async updateNews(id: DbId, title: string, description: string, content: string, userId: string): Promise<boolean> {
         const news = await newsRepository.getNewsById(id)
         if (!news) return false
+        if (!news.isOwner(userId)) return false
         news.update(title, description, content)
         await newsRepository.save(news)
         return true

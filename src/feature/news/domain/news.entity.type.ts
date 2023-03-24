@@ -19,6 +19,7 @@ type NewsStatics = {
 export type NewsMethods = {
     update: (title: string, description: string, content: string) => boolean
     publish: (status: boolean) => boolean
+    isOwner: (userId: string) => boolean
 }
 
 export type NewsModelFullType = Model<NewsDocument> & NewsStatics & { _id: Types.ObjectId }

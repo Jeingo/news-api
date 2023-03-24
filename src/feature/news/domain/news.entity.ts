@@ -38,4 +38,8 @@ NewsSchema.methods.publish = function (status: boolean): boolean {
     return true
 }
 
+NewsSchema.methods.isOwner = function (userId: string): boolean {
+    return this.userId === userId
+}
+
 export const NewsModel = mongoose.model<NewsDocument, NewsModelFullType>('news', NewsSchema)

@@ -38,7 +38,7 @@ class NewsController {
     async updateNews(req: RequestWithParamsAndBody<IdParams, InputUpdateModel>, res: Response) {
         const { title, description, content } = req.body
 
-        const updatedBlog = await newsService.updateNews(req.params.id, title, description, content)
+        const updatedBlog = await newsService.updateNews(req.params.id, title, description, content, req.user!.userId)
 
         if (!updatedBlog) {
             res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
