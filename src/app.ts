@@ -10,5 +10,5 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.use('/api/auth', authRouter)
-app.use('api/news', newsRouter)
-app.use('api/testing/delete-all-data', testRouter)
+app.use('/api/news', newsRouter)
+app.use('/api/testing/delete-all-data', testRouter)
