@@ -35,7 +35,18 @@ class NewsController {
         res.status(HTTP_STATUSES.CREATED_201).json(news!)
     }
 
-    async updateNews(req: RequestWithParamsAndBody<IdParams, InputUpdateModel>, res: Response) {}
+    async updateNews(req: RequestWithParamsAndBody<IdParams, InputUpdateModel>, res: Response) {
+        const { title, description, content } = req.body
+
+        const updatedBlog = await newsService.updateNews(req.params.id, title, description, content)
+
+        if (!updatedBlog) {
+            res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
+            return
+        }
+
+        res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
+    }
 
     async deleteNews(req: RequestWithParams<IdParams>, res: Response) {}
 }

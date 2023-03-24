@@ -8,11 +8,15 @@ class NewsService {
         await newsRepository.save(news)
         return news._id.toString()
     }
-    async updateBlog(id: DbId, title: string, description: string, content: string): Promise<boolean> {
+    async updateNews(id: DbId, title: string, description: string, content: string): Promise<boolean> {
+        const news = await newsRepository.getNewsById(id)
+        if (!news) return false
+        news.update(title, description, content)
+        await newsRepository.save(news)
         return true
     }
 
-    async deleteBlog(id: DbId): Promise<boolean> {
+    async deleteNews(id: DbId): Promise<boolean> {
         return true
     }
 }
