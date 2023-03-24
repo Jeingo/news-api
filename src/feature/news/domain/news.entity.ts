@@ -7,6 +7,7 @@ export const NewsSchema = new mongoose.Schema<News>({
     content: { type: String, maxlength: 1000, required: true },
     createdAt: { type: String, required: true },
     published: { type: Boolean, required: true },
+    isDeleted: { type: Boolean, required: true },
     static_img: { type: String }
 })
 
@@ -18,6 +19,7 @@ NewsSchema.statics.make = function (title: string, description: string, content:
         content: content,
         createdAt: newDate.toISOString(),
         published: false,
+        isDeleted: false,
         static_img: '/img'
     })
 }

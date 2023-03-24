@@ -6,6 +6,7 @@ export type News = {
     content: string
     createdAt: string
     published: boolean
+    isDeleted: boolean
     static_img: string
 }
 export type NewsDocument = HydratedDocument<News> & NewsMethods

@@ -16,6 +16,7 @@ class JwtService {
             refreshToken: refreshToken
         }
     }
+
     checkExpirationAndGetPayload(token: Token): TokenPayloadType | null {
         try {
             return jwt.verify(token, settings.JWT_REFRESH_SECRET) as TokenPayloadType
@@ -23,7 +24,7 @@ class JwtService {
             return null
         }
     }
-    //todo check it
+
     getUserIdByToken(token: string): DbId | null {
         try {
             const result: any = jwt.verify(token, settings.JWT_SECRET)

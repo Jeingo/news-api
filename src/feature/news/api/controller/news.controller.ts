@@ -14,9 +14,13 @@ import { InputCreateModel } from './models/input.create.model'
 
 class NewsController {
     async getAllNews(req: RequestWithQuery<QueryNews>, res: Response<PaginatedType<OutputNewsModel>>) {}
+
     async getNewsById(req: RequestWithParams<IdParams>, res: Response<OutputNewsModel>) {}
+
     async createNews(req: RequestWithBody<InputCreateModel>, res: Response<OutputNewsModel>) {}
+
     async updateNews(req: RequestWithParamsAndBody<IdParams, InputUpdateModel>, res: Response) {}
+
     async deleteNews(req: RequestWithParams<IdParams>, res: Response) {}
 }
 

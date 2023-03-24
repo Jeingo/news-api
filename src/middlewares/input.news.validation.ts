@@ -1,0 +1,28 @@
+import { body } from 'express-validator'
+
+export const titleValidation = body('title')
+    .trim()
+    .notEmpty()
+    .withMessage(`Shouldn't be empty`)
+    .isString()
+    .withMessage('Should be string type')
+    .isLength({ max: 30 })
+    .withMessage('Should be less than 30 symbols')
+
+export const descriptionValidation = body('description')
+    .trim()
+    .notEmpty()
+    .withMessage(`Shouldn't be empty`)
+    .isString()
+    .withMessage('Should be string type')
+    .isLength({ max: 100 })
+    .withMessage('Should be less than 100 symbols')
+
+export const contentValidation = body('content')
+    .trim()
+    .notEmpty()
+    .withMessage(`Shouldn't be empty`)
+    .isString()
+    .withMessage('Should be string type')
+    .isLength({ max: 1000 })
+    .withMessage('Should be less than 1000 symbols')
