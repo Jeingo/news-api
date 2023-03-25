@@ -25,7 +25,7 @@ You can check my app on Vercel :
 
 P.S. Static file don't work on Vercel . Only localhost
 
-## Postman:
+## Postman( like Documentation):
 
 You can check my app via postman
 
