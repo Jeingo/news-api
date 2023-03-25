@@ -35,7 +35,7 @@ class NewsController {
 
     async createNews(req: RequestWithBody<InputCreateModel>, res: Response<OutputNewsModel>) {
         const { title, description, content } = req.body
-        const file = req.files!.file as UploadedFile
+        const file = req.files?.file as UploadedFile
         const newsId = await newsService.createNews(title, description, content, file, req.user!.userId)
         const news = await newsQueryRepository.getNewsById(newsId, req.user!.userId)
         res.status(HTTP_STATUSES.CREATED_201).json(news!)
