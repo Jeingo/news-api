@@ -2,6 +2,10 @@ import { Request, Response, NextFunction } from 'express'
 import { HTTP_STATUSES } from '../../constants/http-statuses'
 import { jwtService } from '../../infrastructure/jwt.service'
 
+/**
+ * Description: if user authorized then function add {userId} to req.user .
+ * Else throw 401 exception
+ */
 export const bearerAuth = async (req: Request, res: Response, next: NextFunction) => {
     if (!req.headers.authorization) {
         res.sendStatus(HTTP_STATUSES.UNAUTHORIZED_401)

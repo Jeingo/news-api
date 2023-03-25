@@ -4,6 +4,9 @@ import { settings } from '../settings/setting'
 const mongoUrl = settings.MONGO_URL
 const dbName = settings.DB_NAME
 
+/**
+ * Description: Start connection to mongodb
+ */
 export const runDb = async () => {
     try {
         mongoose.set('strictQuery', false)
