@@ -9,6 +9,9 @@ import { makeDirectionToNumber } from '../../../helper/helper'
 import { SortOrder } from 'mongoose'
 
 class NewsQueryRepository {
+    /**
+     * Description: Return all news
+     */
     async getAllNews(query: QueryNews, userId?: string): Promise<PaginatedType<OutputNewsModel>> {
         const { sortBy = 'createdAt', sortDirection = 'desc', pageNumber = 1, pageSize = 10 } = query
 
@@ -37,6 +40,9 @@ class NewsQueryRepository {
 
         return this.getPaginatedType(res.map(this.getOutputNews), +pageSize, +pageNumber, countAllDocuments)
     }
+    /**
+     * Description: Return news by id
+     */
     async getNewsById(id: DbId, userId?: string): Promise<OutputNewsModel | null> {
         let result
         if (userId) {
