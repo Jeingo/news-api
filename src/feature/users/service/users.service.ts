@@ -3,6 +3,9 @@ import { UsersModel } from '../domain/user.entity'
 import { usersRepository } from '../repositories/users.repository'
 
 class UsersService {
+    /**
+     * Description: Create user
+     */
     async createUser(login: string, email: string, password: string): Promise<DbId> {
         const user = UsersModel.make(login, email, password)
         await usersRepository.save(user)

@@ -5,6 +5,9 @@ import { UploadedFile } from 'express-fileupload'
 import { fileService } from './file.service'
 
 class NewsService {
+    /**
+     * Description: Create news
+     */
     async createNews(
         title: string,
         description: string,
@@ -17,6 +20,10 @@ class NewsService {
         await newsRepository.save(news)
         return news._id.toString()
     }
+
+    /**
+     * Description: Update news
+     */
     async updateNews(id: DbId, title: string, description: string, content: string, userId: string): Promise<boolean> {
         const news = await newsRepository.getNewsById(id)
         if (!news) return false
@@ -26,6 +33,9 @@ class NewsService {
         return true
     }
 
+    /**
+     * Description: Delete news
+     */
     async deleteNews(id: DbId, userId: string): Promise<boolean> {
         const news = await newsRepository.getNewsById(id)
         if (!news) return false
@@ -35,6 +45,9 @@ class NewsService {
         return true
     }
 
+    /**
+     * Description: Publish/unpublish news
+     */
     async publish(id: DbId, status: boolean, userId: string): Promise<boolean> {
         const news = await newsRepository.getNewsById(id)
         if (!news) return false

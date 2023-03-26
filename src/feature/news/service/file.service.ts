@@ -3,6 +3,9 @@ import path from 'path'
 import { UploadedFile } from 'express-fileupload'
 
 class FileService {
+    /**
+     * Description: Saving file in /public directory
+     */
     async saveFile(file: UploadedFile) {
         try {
             const type = file.name.split('.')[1]

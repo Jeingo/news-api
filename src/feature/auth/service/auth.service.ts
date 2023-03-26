@@ -5,6 +5,9 @@ import { DbId } from '../../../global-types/db.types'
 import { jwtService } from '../../../infrastructure/jwt.service'
 
 class AuthService {
+    /**
+     * Description: Check credentials. If (login - email) and password correct then function return user id
+     */
     async checkCredentialsAndGetUserId(loginOrEmail: string, password: string): Promise<DbId | null> {
         const user = await usersRepository.getUserByLoginOrEmail(loginOrEmail)
         if (!user) return null
@@ -14,6 +17,10 @@ class AuthService {
         }
         return user._id.toString()
     }
+
+    /**
+     * Description: Check refresh token. If refresh token don't expired and active then function return token payload
+     */
     async checkAuthorizationAndGetPayload(refreshToken: Token): Promise<TokenPayloadType | null> {
         const payload = jwtService.checkExpirationAndGetPayload(refreshToken)
         if (!payload) {
@@ -25,6 +32,10 @@ class AuthService {
         }
         return payload
     }
+
+    /**
+     * Description: Saving refresh token (session)
+     */
     async saveSession(userId: DbId, refreshToken: Token): Promise<boolean> {
         const user = await usersRepository.getUserById(userId)
         if (!user) {
@@ -34,6 +45,10 @@ class AuthService {
         await usersRepository.save(user)
         return true
     }
+
+    /**
+     * Description: Deleting refresh token (session)
+     */
     async deleteSession(userId: DbId): Promise<boolean> {
         const user = await usersRepository.getUserById(userId)
         if (!user) {
@@ -43,6 +58,10 @@ class AuthService {
         await usersRepository.save(user)
         return true
     }
+
+    /**
+     * Description: Check session : is active ?
+     */
     private async isActiveSession(userId: DbId): Promise<boolean> {
         const user = await usersRepository.getUserById(userId)
         return !!user

@@ -11,12 +11,18 @@ import { settings } from '../../../../settings/setting'
 const SECURE_COOKIE_MODE = settings.SECURE_COOKIE_MODE == 'true' //todo refactoring
 
 class AuthController {
+    /**
+     * Description: Registration user
+     */
     async registration(req: RequestWithBody<InputRegistrationModel>, res: Response) {
         const { login, email, password } = req.body
         await usersService.createUser(login, email, password)
         res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
     }
 
+    /**
+     * Description: Login user
+     */
     async login(req: RequestWithBody<InputLoginModel>, res: Response) {
         const { loginOrEmail, password } = req.body
         const userId = await authService.checkCredentialsAndGetUserId(loginOrEmail, password)
@@ -36,6 +42,9 @@ class AuthController {
         res.status(HTTP_STATUSES.OK_200).json({ accessToken: accessToken })
     }
 
+    /**
+     * Description: Logout user
+     */
     async logout(req: Request, res: Response) {
         const cookieRefreshToken = req.cookies.refreshToken
 
@@ -51,6 +60,9 @@ class AuthController {
         res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
     }
 
+    /**
+     * Description: Update refresh and access token
+     */
     async refreshToken(req: Request, res: Response) {
         const cookieRefreshToken = req.cookies.refreshToken
 

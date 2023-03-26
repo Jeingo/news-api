@@ -4,6 +4,9 @@ import { NewsModel } from '../../../news/domain/news.entity'
 import { HTTP_STATUSES } from '../../../../constants/http-statuses'
 
 class TestingController {
+    /**
+     * Description: Clear all collection in db
+     */
     async clearAllCollection(req: Request, res: Response) {
         await UsersModel.deleteMany({})
         await NewsModel.deleteMany({})
