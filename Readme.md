@@ -11,7 +11,9 @@
 
 ```yarn install```
 
-Fill in .env file .
+Fill in .env file . (yourself mongodb url)
+
+```yarn build```
 
 ```yarn start```
 
