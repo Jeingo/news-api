@@ -3,6 +3,7 @@ import { NewsModel } from '../domain/news.entity'
 import { newsRepository } from '../repositories/news.repository'
 import { UploadedFile } from 'express-fileupload'
 import { fileService } from './file.service'
+import * as schedule from 'node-schedule'
 
 class NewsService {
     /**
@@ -12,10 +13,13 @@ class NewsService {
         title: string,
         description: string,
         content: string,
-        file: UploadedFile,
-        userId: string
+        userId: string,
+        file?: UploadedFile
     ): Promise<DbId> {
-        const fileName = await fileService.saveFile(file)
+        let fileName
+        if (file) {
+            fileName = await fileService.saveFile(file)
+        }
         const news = NewsModel.make(title, description, content, userId, fileName)
         await newsRepository.save(news)
         return news._id.toString()
@@ -46,14 +50,24 @@ class NewsService {
     }
 
     /**
-     * Description: Publish/unpublish news
+     * Description: Publish/unpublish news with delay
      */
-    async publish(id: DbId, status: boolean, userId: string): Promise<boolean> {
+    async publish(id: DbId, status: boolean, userId: string, delay?: number): Promise<boolean> {
         const news = await newsRepository.getNewsById(id)
         if (!news) return false
         if (!news.isOwner(userId)) return false
-        news.publish(status)
-        await newsRepository.save(news)
+
+        if (delay && status) {
+            const date = new Date(delay)
+            const scheduler = async () => {
+                news.publish(status)
+                await newsRepository.save(news)
+            }
+            schedule.scheduleJob(date, scheduler)
+        } else {
+            news.publish(status)
+            await newsRepository.save(news)
+        }
         return true
     }
 }

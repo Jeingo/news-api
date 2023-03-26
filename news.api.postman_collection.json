@@ -1,0 +1,356 @@
+{
+	"info": {
+		"_postman_id": "cca2f244-7d0e-4cdc-8abe-b5064a8be884",
+		"name": "News api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17856555"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"login\",\r\n    \"email\": \"jeingo20@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/auth/registration",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"registration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"loginOrEmail\": \"login\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/auth/login",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/auth/logout",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/auth/refresh-token",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "news",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDFlMTUxNTMzNjA3MDgxYjAwYWMwOGUiLCJpYXQiOjE2Nzk2OTk0MDgsImV4cCI6MTY3OTY5OTcwOH0.Jx6EjiJP1YxgQjyAY_TV28CSLlCDc3a67zBW9TdIUVg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "title",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "description",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "content more more more",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "a5Gp4GwiZ/me.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/news/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"news",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/news/641e1dbc5d35b49f5d3eda63",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"news",
+								"641e1dbc5d35b49f5d3eda63"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDFlMDgyOTNmODNkZGJlMGQxYzUwZWIiLCJpYXQiOjE2Nzk2OTI1MDcsImV4cCI6MTY3OTY5MjgwN30.u4hYeE7ZbC0faLwJI_0T_0oFL2XaZCEzfE9_wbHLRzU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"super title new\",\r\n    \"description\": \"description new \",\r\n    \"content\": \"content more more more more new\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/news/641e12e2fb2dbbfb7bb973d4",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"news",
+								"641e12e2fb2dbbfb7bb973d4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDFlMTUxNTMzNjA3MDgxYjAwYWMwOGUiLCJpYXQiOjE2Nzk2OTMwODAsImV4cCI6MTY3OTY5MzM4MH0.jXn-dtPfdcWaq1L8pMyD62wWpqvd5X-fvTzluCb7oq0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/news/641e151e33607081b00ac093",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"news",
+								"641e151e33607081b00ac093"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all news",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDFlMTUxNTMzNjA3MDgxYjAwYWMwOGUiLCJpYXQiOjE2Nzk2OTQ3NjIsImV4cCI6MTY3OTY5NTA2Mn0.HLY_2JKTrBAJ4WlvQHxXY9RFMuOdFBK-mFwCYMOtuBY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/news/?pageSize=2&pageNumber=2",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"news",
+								""
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "2"
+								},
+								{
+									"key": "pageNumber",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "publish",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDFlMTUxNTMzNjA3MDgxYjAwYWMwOGUiLCJpYXQiOjE2Nzk2OTUyODIsImV4cCI6MTY3OTY5NTU4Mn0.8uuBLBVL-Yh_WMhF1BIxL6CeGw_n40JQ-o-1_w8PL1Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/news/641e1dbc5d35b49f5d3eda63/publish",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"news",
+								"641e1dbc5d35b49f5d3eda63",
+								"publish"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "testing",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/testing/delete-all-data",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"testing",
+								"delete-all-data"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -28,7 +28,7 @@ NewsSchema.statics.make = function (
         published: false,
         isDeleted: false,
         userId: userId,
-        fileName: fileName
+        fileName: fileName || null
     })
 }
 

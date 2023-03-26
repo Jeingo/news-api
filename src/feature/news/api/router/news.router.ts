@@ -4,7 +4,9 @@ import { bearerAuth } from '../../../../middlewares/authorization/bearer.auth'
 import { newsController } from '../controller/news.controller'
 import {
     contentValidation,
+    delayValidation,
     descriptionValidation,
+    statusValidation,
     titleValidation
 } from '../../../../middlewares/input.news.validation'
 import { anonymousAuth } from '../../../../middlewares/authorization/anonymous.auth'
@@ -38,4 +40,12 @@ newsRouter.put(
 
 newsRouter.delete('/:id', bearerAuth, idValidation, newsController.deleteNews)
 
-newsRouter.put('/:id/publish', bearerAuth, idValidation, newsController.publish)
+newsRouter.put(
+    '/:id/publish',
+    bearerAuth,
+    idValidation,
+    statusValidation,
+    delayValidation,
+    inputValidation,
+    newsController.publish
+)

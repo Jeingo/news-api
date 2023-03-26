@@ -26,3 +26,10 @@ export const contentValidation = body('content')
     .withMessage('Should be string type')
     .isLength({ max: 1000 })
     .withMessage('Should be less than 1000 symbols')
+
+export const statusValidation = body('status').notEmpty().isBoolean().withMessage('Should be boolean type')
+
+export const delayValidation = body('delay')
+    .optional()
+    .isInt({ min: Date.now() })
+    .withMessage('Should be number type and greater than date now')

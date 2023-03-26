@@ -45,7 +45,7 @@ class NewsController {
     async createNews(req: RequestWithBody<InputCreateModel>, res: Response<OutputNewsModel>) {
         const { title, description, content } = req.body
         const file = req.files?.file as UploadedFile
-        const newsId = await newsService.createNews(title, description, content, file, req.user!.userId)
+        const newsId = await newsService.createNews(title, description, content, req.user!.userId, file)
         const news = await newsQueryRepository.getNewsById(newsId, req.user!.userId)
         res.status(HTTP_STATUSES.CREATED_201).json(news!)
     }
@@ -84,7 +84,7 @@ class NewsController {
      * Description: Publish/unpublish news
      */
     async publish(req: RequestWithParamsAndBody<IdParams, StatusPublish>, res: Response) {
-        const news = await newsService.publish(req.params.id, req.body.status, req.user!.userId)
+        const news = await newsService.publish(req.params.id, req.body.status, req.user!.userId, req.body.delay)
 
         if (!news) {
             res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)

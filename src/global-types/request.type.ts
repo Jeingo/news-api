@@ -7,4 +7,4 @@ export type RequestWithParamsAndBody<T, B> = Request<T, {}, B>
 
 export type IdParams = { id: string }
 
-export type StatusPublish = { status: boolean }
+export type StatusPublish = { status: boolean; delay?: number }
