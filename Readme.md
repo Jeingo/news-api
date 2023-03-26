@@ -20,7 +20,7 @@ Fill in .env file .
 
 You can check my app on Vercel :
 
-[vercel app](https://news-api-eight-flame.vercel.app/)
+[vercel app](https://news-api-eight-flame.vercel.app/api/news)
 
 
 P.S. Static file don't work on Vercel . Only localhost
