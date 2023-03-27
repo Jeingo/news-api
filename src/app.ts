@@ -25,7 +25,7 @@ app.use(express.static('public-files'))
 app.use(express.static('public-websocket'))
 
 // For real-time notification
-app.get('/', function (req: Request, res: Response) {
+app.get('/check-notification', function (req: Request, res: Response) {
     res.sendFile('index.html')
 })
 
