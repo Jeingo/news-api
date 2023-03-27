@@ -8,7 +8,7 @@ import { authService } from '../../service/auth.service'
 import { jwtService } from '../../../../infrastructure/jwt.service'
 import { settings } from '../../../../settings/setting'
 
-const SECURE_COOKIE_MODE = settings.SECURE_COOKIE_MODE == 'true' //todo refactoring
+const SECURE_COOKIE_MODE = settings.SECURE_COOKIE_MODE == 'true'
 
 class AuthController {
     /**
