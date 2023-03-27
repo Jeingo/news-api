@@ -4,6 +4,7 @@ import { newsRepository } from '../repositories/news.repository'
 import { UploadedFile } from 'express-fileupload'
 import { fileService } from './file.service'
 import * as schedule from 'node-schedule'
+import { io } from '../../../app'
 
 class NewsService {
     /**
@@ -22,6 +23,7 @@ class NewsService {
         }
         const news = NewsModel.make(title, description, content, userId, fileName)
         await newsRepository.save(news)
+        io.emit('message', 'created news success')
         return news._id.toString()
     }
 
@@ -34,6 +36,7 @@ class NewsService {
         if (!news.isOwner(userId)) return false
         news.update(title, description, content)
         await newsRepository.save(news)
+        io.emit('message', 'updated news success')
         return true
     }
 
@@ -46,6 +49,7 @@ class NewsService {
         if (!news.isOwner(userId)) return false
         news.delete()
         await newsRepository.save(news)
+        io.emit('message', 'deleted news success')
         return true
     }
 
@@ -62,11 +66,13 @@ class NewsService {
             const scheduler = async () => {
                 news.publish(status)
                 await newsRepository.save(news)
+                io.emit('message', 'publish news success')
             }
             schedule.scheduleJob(date, scheduler)
         } else {
             news.publish(status)
             await newsRepository.save(news)
+            io.emit('message', 'publish news success')
         }
         return true
     }

@@ -1,4 +1,4 @@
-import { app } from './app'
+import { server } from './app'
 import { settings } from './settings/setting'
 import { runDb } from './db/db'
 
@@ -6,7 +6,7 @@ const PORT = settings.PORT
 
 const startApp = async () => {
     await runDb()
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
         console.log(`Server is starting on port: ${PORT}`)
     })
 }

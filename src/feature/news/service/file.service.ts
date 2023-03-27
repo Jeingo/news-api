@@ -4,7 +4,7 @@ import { UploadedFile } from 'express-fileupload'
 
 class FileService {
     /**
-     * Description: Saving file in /public directory
+     * Description: Saving file in /public-files directory
      */
     async saveFile(file: UploadedFile) {
         try {
