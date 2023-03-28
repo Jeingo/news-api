@@ -26,7 +26,7 @@ app.use(express.static('public-websocket'))
 
 // For real-time notification
 app.get('/check-notification', function (req: Request, res: Response) {
-    res.sendFile('index.html')
+    res.sendFile('index.html', { root: './public-websocket' })
 })
 
 app.use('/api/auth', authRouter)
